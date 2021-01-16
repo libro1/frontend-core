@@ -6,7 +6,7 @@ const initialForm = {
   password: "",
 };
 
-function LoginForm() {
+function LoginForm({ submitForm, isLoading }) {
   const [form, setForm] = useState(initialForm);
 
   const handleChange = (event) => {
@@ -19,7 +19,7 @@ function LoginForm() {
 
   const handeSubmit = (e) => {
     e.preventDefault();
-    alert("tes");
+    submitForm(form.email, form.password);
   };
 
   const isFormEmpty = form.password === "" || form.email === "";
@@ -45,7 +45,12 @@ function LoginForm() {
           onChange={handleChange}
           value={form.password}
         />
-        <Button disabled={isFormEmpty} type="submit" color="primary" variant="contained">
+        <Button
+          disabled={isFormEmpty}
+          type="submit"
+          color="primary"
+          variant="contained"
+        >
           Iniciar sesión
         </Button>
       </form>
