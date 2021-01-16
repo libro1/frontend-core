@@ -1,33 +1,19 @@
-import logo from "./logo.svg";
+import LoginPage from "./pages/login";
+//import sessionService from "./services/login";
 import "./App.css";
-import sessionService from "./services/login";
 
 function App() {
-  const login = async () => {
-    try {
-      await sessionService.login("javiemgz@gmail.com", "12345w6");
-    } catch (e) {
-      console.log(e)
-    }
-  };
+  // const login = async () => {
+  //   try {
+  //     await sessionService.login("javiemgz@gmail.com", "12345w6");
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // };
 
-  login();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <LoginPage />
     </div>
   );
 }
