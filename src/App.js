@@ -1,7 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import sessionService from "./services/login";
 
 function App() {
+  const login = async () => {
+    try {
+      await sessionService.login("javiemgz@gmail.com", "12345w6");
+    } catch (e) {
+      console.log(e)
+    }
+  };
+
+  login();
   return (
     <div className="App">
       <header className="App-header">
