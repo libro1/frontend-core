@@ -1,35 +1,38 @@
 import React, { useState } from "react";
-import { Box } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 
 import LoginForm from "../components/loginForm";
+import ShowErros from "../components/showErrors";
 import sessionService from "../services/login";
 
 import logo from "../assets/logo.png";
 
 function Login() {
   const [loading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const submitForm = async (email, password) => {
     setIsLoading(true);
     try {
+      setHasError(false);
       const res = await sessionService.login(email, password);
-      console.log("sipa")
-      console.log(res)
+      console.log(res);
     } catch (e) {
-      console.log("no pa")
-      debugger
-      console.log(e);
+      setHasError(true);
+      setErrors(e.response.data.errors);
     }
     setIsLoading(false);
   };
 
   return (
-    <div>
-      <Box className="centerContent" m={8}>
+    <Container maxWidth="xs">
+      <Box className="centerContent" m={5}>
         <img src={logo} alt="logo" width="250 rem" />
       </Box>
+      {hasError && <ShowErros list={errors} />}
       <LoginForm loading={loading} submitForm={submitForm} />
-    </div>
+    </Container>
   );
 }
 
