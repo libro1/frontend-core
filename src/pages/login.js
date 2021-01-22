@@ -18,6 +18,7 @@ function Login() {
       setHasError(false);
       const res = await sessionService.login(email, password);
       console.log(res);
+      setIsLoading(false);
     } catch (e) {
       setHasError(true);
       console.log(e);
@@ -26,9 +27,9 @@ function Login() {
           {
             msg:
               "Error en la conexion con el servidor, intente nuevamente mas tarde",
-          }
+          },
         ]);
-        return
+        return;
       }
       setErrors(e.response.data.errors);
     }
@@ -41,7 +42,7 @@ function Login() {
         <img src={logo} alt="logo" width="250 rem" />
       </Box>
       {hasError && <ShowErros list={errors} />}
-      <LoginForm loading={loading} submitForm={submitForm} />
+      <LoginForm isLoading={loading} submitForm={submitForm} />
     </Container>
   );
 }

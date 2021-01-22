@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { Button, CircularProgress, TextField } from "@material-ui/core";
 
 const initialForm = {
   email: "",
@@ -45,14 +45,21 @@ function LoginForm({ submitForm, isLoading }) {
           onChange={handleChange}
           value={form.password}
         />
-        <Button
-          disabled={isFormEmpty}
-          type="submit"
-          color="primary"
-          variant="contained"
-        >
-          Iniciar sesión
-        </Button>
+
+        <div className="centerContent">
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            <Button
+              disabled={isFormEmpty}
+              type="submit"
+              color="primary"
+              variant="contained"
+            >
+              Iniciar sesión
+            </Button>
+          )}
+        </div>
       </form>
     </>
   );
