@@ -20,6 +20,16 @@ function Login() {
       console.log(res);
     } catch (e) {
       setHasError(true);
+      console.log(e);
+      if (!e.response) {
+        setErrors([
+          {
+            msg:
+              "Error en la conexion con el servidor, intente nuevamente mas tarde",
+          }
+        ]);
+        return
+      }
       setErrors(e.response.data.errors);
     }
     setIsLoading(false);
