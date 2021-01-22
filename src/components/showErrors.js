@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from 'prop-types';
 import Alert from "@material-ui/lab/Alert";
 import { Box } from "@material-ui/core";
 
@@ -10,6 +11,10 @@ function ShowErrors({ list }) {
       ))}
     </Box>
   );
+}
+
+ShowErrors.propTypes = {
+  list: propTypes.array,
 }
 
 export default ShowErrors;

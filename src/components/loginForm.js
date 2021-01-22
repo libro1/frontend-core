@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, CircularProgress, TextField } from "@material-ui/core";
+import propTypes from 'prop-types';
 
 const initialForm = {
   email: "",
@@ -63,6 +64,11 @@ function LoginForm({ submitForm, isLoading }) {
       </form>
     </>
   );
+}
+
+LoginForm.propTypes = {
+  submitForm: propTypes.func,
+  isLoading: propTypes.bool,
 }
 
 export default LoginForm;
