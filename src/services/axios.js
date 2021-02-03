@@ -1,13 +1,14 @@
 import axios from "axios";
 
-const cookie = JSON.parse(sessionStorage.getItem("cookie"));
+export const getHeaders = (token) => {
+  return {
+    headers: {
+      "user-token": token,
+    },
+  };
+};
 
-const instance = axios.create({
+export const restClient = axios.create({
   baseURL: "https://libro1-api.herokuapp.com",
   timeout: 10000,
-  headers: {
-    "user-token": cookie ? cookie.token : "",
-  },
 });
-
-export default instance;

@@ -9,11 +9,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (user) SessionService.isLogged().then((res) => setIsLogged(res));
-    else setIsLogged(false);
+    if (user) {
+      SessionService.isLogged().then((res) => setIsLogged(res));
+    } else setIsLogged(false);
   }, [user]);
 
   if (isLogged === undefined) return <div>Loading</div>;
+
   return (
     <div>
       <Route

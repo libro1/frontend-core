@@ -1,4 +1,4 @@
-import restClient from "./axios";
+import { restClient, getHeaders } from "./axios";
 
 class SessionService {
   async login(email, password) {
@@ -15,14 +15,17 @@ class SessionService {
 
   getCookie() {
     const cookie = sessionStorage.getItem("cookie");
-    return cookie ? JSON.parse(cookie) : null
+    return cookie ? JSON.parse(cookie) : null;
   }
 
   async isLogged() {
     const token = sessionStorage.getItem("cookie");
     if (!token) return false;
     try {
-      const tokenValidation = await restClient.get("/check-token");
+      const tokenValidation = await restClient.get(
+        "/check-token",
+        getHeaders(this.getCookie().token)
+      );
       return tokenValidation.data.isValid;
     } catch (e) {
       return false;

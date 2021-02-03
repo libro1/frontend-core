@@ -29,7 +29,6 @@ function Login() {
     } catch (e) {
       setHasError(true);
       setIsLoading(false);
-      debugger
       if (!e.response) {
         setErrors([
           {
