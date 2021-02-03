@@ -10,6 +10,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   useEffect(() => {
     if (user) {
+      setIsLogged(undefined);
       SessionService.isLogged().then((res) => setIsLogged(res));
     } else setIsLogged(false);
   }, [user]);
