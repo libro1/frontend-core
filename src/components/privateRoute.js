@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 
+import { UserContext } from "../context/userContext";
 import SessionService from "../services/sessionService";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [isLogged, setIsLogged] = useState(undefined);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    
-    SessionService.isLogged().then((res) => setIsLogged(res));
-  }, []);
+    if (user) SessionService.isLogged().then((res) => setIsLogged(res));
+    else setIsLogged(false);
+  }, [user]);
 
-  if(isLogged === undefined)
-    return(<div>Loading</div>)
-
+  if (isLogged === undefined) return <div>Loading</div>;
   return (
     <div>
-      {isLogged && "Logged in"}
       <Route
         exact
         {...rest}

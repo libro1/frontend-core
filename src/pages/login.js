@@ -1,27 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Box, Container } from "@material-ui/core";
 
+import { UserContext } from "../context/userContext";
 import LoginForm from "../components/loginForm";
 import ShowErros from "../components/showErrors";
 import sessionService from "../services/sessionService";
 
 import logo from "../assets/logo.png";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const [loading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [errors, setErrors] = useState([]);
 
+  const history = useHistory();
+
+  const { setUser } = useContext(UserContext);
+
   const submitForm = async (email, password) => {
     setIsLoading(true);
     try {
       setHasError(false);
       const res = await sessionService.login(email, password);
-      console.log(res);
       setIsLoading(false);
+      setUser(res);
+      history.push("/home");
     } catch (e) {
       setHasError(true);
-      console.log(e);
+      setIsLoading(false);
+      debugger
       if (!e.response) {
         setErrors([
           {
@@ -33,7 +41,6 @@ function Login() {
       }
       setErrors(e.response.data.errors);
     }
-    setIsLoading(false);
   };
 
   return (
